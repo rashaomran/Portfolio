@@ -608,12 +608,24 @@ body.menu-open .nav-mobile {
 }
 
 
-
-/* image container */
 .hero-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* 🔥 KEY FIX (controls height correctly) */
+
   position: relative;
-  border-radius: 24px;
   overflow: hidden;
+  border-radius: 24px;
+
+  line-height: 0;
+}
+
+/* Image fills wrapper perfectly */
+.hero-image {
+  width: 100%;
+  height: 100%;          /* 🔥 IMPORTANT */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 }
 
 /* Glow effect */
@@ -626,20 +638,10 @@ body.menu-open .nav-mobile {
   pointer-events: none;
 }
 
-/* Image */
-.hero-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 24px;
-  transition: transform 0.5s ease;
-}
-
 /* Hover zoom */
 .hero-image-wrapper:hover .hero-image {
   transform: scale(1.05);
 }
-
 /* Logo container */
 .logo {
   display: flex;
