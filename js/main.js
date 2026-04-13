@@ -137,3 +137,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   type();
 });
+
+
+/* Form */
+const form = document.getElementById("contact-form-el");
+const status = document.getElementById("form-status");
+const btn = document.getElementById("submit-btn");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+
+  const data = new FormData(form);
+
+  try {
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" }
+    });
+
+    if (res.ok) {
+      status.innerText = "✅ Message sent successfully. I’ll get back to you soon.";
+      form.reset();
+    } else {
+      status.innerText = "❌ Something went wrong. Please try again.";
+    }
+  } catch (err) {
+    status.innerText = "❌ Network error. Please try again.";
+  }
+
+  btn.disabled = false;
+  btn.innerText = "Submit briefing";
+});
