@@ -555,13 +555,13 @@ body.menu-open .nav-mobile {
 
 .hero-visual {
   position: relative;
-  min-height: 280px;
   border-radius: var(--radius-lg);
   background: var(--gradient-soft);
   border: 1px solid var(--border-strong);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  min-height: unset;
+
+ transform: translateZ(0);
   overflow: hidden;
 }
 
@@ -608,22 +608,21 @@ body.menu-open .nav-mobile {
   margin-top: 0.5rem;
 }
 
-
 .hero-image-wrapper {
   width: 100%;
-  aspect-ratio: 4 / 3;   /* 🔥 KEY FIX (controls height correctly) */
-
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-
   line-height: 0;
-}
 
-/* Image fills wrapper perfectly */
+height: clamp(170px, 30vw, 400px);
+}
+/* image fills wrapper perfectly */
 .hero-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 100%;          /* 🔥 IMPORTANT */
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
@@ -642,6 +641,37 @@ body.menu-open .nav-mobile {
 /* Hover zoom */
 .hero-image-wrapper:hover .hero-image {
   transform: scale(1.05);
+}
+/* about Image */
+
+
+/* Enable smooth transform */
+.about-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  aspect-ratio: 3 / 4;
+}
+
+/* Image prepared for parallax */
+.about-photo img {
+  width: 100%;
+  height: 120%; /* 🔥 bigger so it can move */
+  object-fit: cover;
+
+  transform: translateY(0);
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Glow */
+.about-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,151,178,0.18), transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
 }
 /* Logo container */
 .logo {
@@ -2038,10 +2068,134 @@ border-color: hsl(182 60% 37% / 0.25);
   }
 }
 
+
+
+/* =========================
+   FORM PREMIUM UX
+========================= */
+
 .form-row {
-  margin-bottom: 1rem;
+  position: relative;
+  margin-bottom: 1.2rem;
 }
 
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  transition: all 0.25s ease;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-color: #0097b2;
+  box-shadow: 0 0 0 3px rgba(0,151,178,0.15);
+}
+
+/* Error state */
+.form-row.error input,
+.form-row.error select,
+.form-row.error textarea {
+  border-color: #ef4444;
+}
+
+.form-error {
+  font-size: 0.7rem;
+  color: #ef4444;
+  position: absolute;
+  bottom: -16px;
+  left: 2px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: 0.2s ease;
+}
+
+.form-row.error .form-error {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   BUTTON LOADER
+========================= */
+
+
+.form-actions {
+  display: flex;
+
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+#submit-btn {
+  min-width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  #submit-btn {
+    width: 100%;
+  }
+}
+
+.btn-loader {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: spin 0.7s linear infinite;
+}
+
+.btn.loading .btn-text {
+  
+  opacity: 0;
+}
+
+.btn.loading .btn-loader {
+  opacity: 1;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================
+   SUCCESS STATE
+========================= */
+
+.form-success {
+  color: #22c55e;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: successFade 0.4s ease forwards;
+}
+
+@keyframes successFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   FORM ROW
+========================= */
 .form-row label {
   display: block;
   font-size: 0.75rem;

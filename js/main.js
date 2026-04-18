@@ -140,35 +140,132 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* Form */
-const form = document.getElementById("contact-form-el");
-const status = document.getElementById("form-status");
-const btn = document.getElementById("submit-btn");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form-el");
+  const btn = document.getElementById("submit-btn");
+  const status = document.getElementById("form-status");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  const fields = ["name", "email", "need", "overview"];
 
-  btn.disabled = true;
-  btn.innerText = "Sending...";
-
-  const data = new FormData(form);
-
-  try {
-    const res = await fetch(form.action, {
-      method: "POST",
-      body: data,
-      headers: { Accept: "application/json" }
-    });
-
-    if (res.ok) {
-      status.innerText = "✅ Message sent successfully. I’ll get back to you soon.";
-      form.reset();
-    } else {
-      status.innerText = "❌ Something went wrong. Please try again.";
-    }
-  } catch (err) {
-    status.innerText = "❌ Network error. Please try again.";
+  function showError(input, message) {
+    const row = input.parentElement;
+    row.classList.add("error");
+    row.querySelector(".form-error").textContent = message;
   }
 
-  btn.disabled = false;
-  btn.innerText = "Submit briefing";
+  function clearError(input) {
+    const row = input.parentElement;
+    row.classList.remove("error");
+  }
+
+  function validate() {
+    let valid = true;
+
+    fields.forEach(id => {
+      const input = document.getElementById(id);
+      const value = input.value.trim();
+
+      clearError(input);
+
+      if (!value) {
+        showError(input, "Required");
+        valid = false;
+      }
+
+      if (id === "email") {
+        const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (!ok) {
+          showError(input, "Invalid email");
+          valid = false;
+        }
+      }
+    });
+
+    return valid;
+  }
+
+  fields.forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener("blur", () => {
+      validate();
+    });
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    const formData = new FormData(form);
+
+    // Honeypot protection
+    if (formData.get("_gotcha")) return;
+
+    btn.classList.add("loading");
+    btn.disabled = true;
+    status.textContent = "";
+
+    try {
+      const res = await fetch("https://formspree.io/f/xeepbkdb", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" }
+      });
+
+      if (res.ok) {
+        form.reset();
+
+        status.className = "form-success";
+        status.textContent = "✓ Message sent successfully";
+        status.style.color = "#31F604";
+
+      } else {
+        status.textContent = "Something went wrong. Try again.";
+        status.style.color = "#ef4444";
+      }
+
+    } catch {
+      status.textContent = "Network error. Try again.";
+      status.style.color = "#ef4444";
+    }
+
+    btn.classList.remove("loading");
+    btn.disabled = false;
+  });
 });
+
+
+// =========================
+// PARALLAX (ULTRA SMOOTH)
+// =========================
+(function () {
+  const images = document.querySelectorAll(".about-photo img");
+
+  let scrollY = window.scrollY;
+  let targetY = scrollY;
+
+  function update() {
+    // smooth interpolation (GSAP-like)
+   scrollY += (targetY - scrollY) * 0.05;
+
+    images.forEach(img => {
+      const rect = img.parentElement.getBoundingClientRect();
+      const windowH = window.innerHeight;
+
+      // progress: -1 (above) → 0 (center) → 1 (below)
+      const progress = (rect.top + rect.height / 2 - windowH / 2) / windowH;
+
+      const move = progress * 60; // 🔥 strength (adjust 20–60)
+
+      img.style.transform = `translateY(${move}px) scale(1.05)`;
+    });
+
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener("scroll", () => {
+    targetY = window.scrollY;
+  });
+
+  update();
+})();

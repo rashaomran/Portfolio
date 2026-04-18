@@ -129,10 +129,10 @@
               </a> -->
             </div>
           </div>
-      <div class="hero-visual reveal reveal-delay-1">
-  <div class="hero-image-wrapper">
-    <img src="assets/hero.jpg" alt="Professional developer working" class="hero-image">
-  </div>
+       <div class="hero-visual">
+    <div class="hero-image-wrapper">
+      <img src="assets/hero.jpg" alt="Professional developer working" class="hero-image">
+    </div>
 
 </div>
           </div>
@@ -163,9 +163,10 @@
       <section id="about" class="section">
         <div class="container">
           <div class="about-grid">
-          <div class="about-photo reveal" aria-hidden="true">
-            <span class="initial">R</span>
-          </div>
+  <div class="about-photo reveal">
+    <img src="assets/about.png" alt="Rasha Omran" />
+  </div>
+
           <div class="about-body reveal reveal-delay-1">
             <span class="eyebrow">Positioning</span>
             <h2>Where <span class="gradient-text">medicine meets</span> mission-critical software</h2>
@@ -1125,52 +1126,52 @@
             </div>
            <div id="contact-form" class="contact-form-wrap reveal reveal-delay-1">
 
-  <form id="contact-form-el"
-        action="https://formspree.io/f/xeepbkdb"
-        method="POST"
-        novalidate>
+<form id="contact-form-el" class="contact-form" novalidate>
 
-    <div class="form-row">
-      <label for="name">Your name</label>
-      <input id="name" name="name" type="text" autocomplete="name"
-             placeholder="Your name" required />
-    </div>
+  <!-- Anti-spam (hidden) -->
+  <input type="text" name="_gotcha" style="display:none">
 
-    <div class="form-row">
-      <label for="email">Work email</label>
-      <input id="email" name="email" type="email" autocomplete="email"
-             placeholder="Your email" required />
-    </div>
+  <input type="hidden" name="_subject" value="New Client Request from Portfolio">
+  <input type="hidden" name="_captcha" value="false">
 
-    <div class="form-row">
-      <label for="need">Engagement type</label>
-      <select id="need" name="need" required>
-        <option value="">Select the best fit</option>
-        <option value="hire">Hiring / delivery — product build or technical leadership</option>
-        <option value="consulting">Strategic consulting — architecture, AI, automation</option>
-        <option value="training">Corporate training or workshop</option>
-        <option value="speaking">Speaking or executive forum</option>
-        <option value="mentorship">Mentorship</option>
-        <option value="other">Other — describe below</option>
-      </select>
-    </div>
+  <div class="form-row">
+    <input id="name" name="name" type="text" placeholder="Your name" required />
+    <span class="form-error"></span>
+  </div>
 
-    <div class="form-row">
-      <label for="overview">Briefing</label>
-      <textarea id="overview" name="overview"
-        placeholder="Objectives, timeline, stakeholders, budget band, and technical constraints…"
-        required></textarea>
-    </div>
+  <div class="form-row">
+    <input id="email" name="email" type="email" placeholder="Your email" required />
+    <span class="form-error"></span>
+  </div>
 
-    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="submit-btn">
-      Submit briefing
-    </button>
+  <div class="form-row">
+    <select id="need" name="need" required>
+      <option value="" disabled selected hidden>Select engagement</option>
+      <option value="hire">Product build / leadership</option>
+      <option value="consulting">Consulting</option>
+      <option value="training">Training</option>
+      <option value="speaking">Speaking</option>
+      <option value="mentorship">Mentorship</option>
+      <option value="other">Other</option>
+    </select>
+    <span class="form-error"></span>
+  </div>
 
-    <p class="form-note" id="form-status">
-      Confidential by default. No mass outreach — a direct reply aligned to your mandate.
-    </p>
+  <div class="form-row">
+    <textarea id="overview" name="overview" placeholder="Project details..." required></textarea>
+    <span class="form-error"></span>
+  </div>
 
-  </form>
+  <div class="form-actions">
+  <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">
+    <span class="btn-text">Submit briefing</span>
+    <span class="btn-loader"></span>
+  </button>
+</div>
+
+  <p class="form-status" id="form-status"></p>
+
+</form>
 </div>
           </div>
         </div>
