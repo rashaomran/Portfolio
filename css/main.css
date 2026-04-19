@@ -1520,9 +1520,12 @@ border-color: hsl(182 60% 37% / 0.25);
   font-weight: 600;
 }
 
+/* ================= CASE STUDY CARDS (HOME PAGE) ================= */
+
+/* Grid */
 .case-grid-2 {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
@@ -1531,32 +1534,77 @@ border-color: hsl(182 60% 37% / 0.25);
   }
 }
 
-.case-card {
-  padding: clamp(1.35rem, 3vw, 1.85rem);
-  border-radius: var(--radius-lg);
- background: var(--gradient-soft);
-box-shadow: var(--shadow-card);
-  border: 1px solid var(--border);
+/* Cards */
+.case-card,
+.case-featured {
   position: relative;
-  transition: border-color 0.25s, transform 0.25s;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: 0.3s ease;
+  overflow: hidden;
+}
+
+/* Featured */
+.case-featured {
+  padding: 2rem;
+  background: var(--surface);
+  margin-bottom: 1.5rem;
+}
+
+/* Normal cards */
+.case-card {
+  padding: 1.5rem;
+  background: var(--gradient-soft);
   display: flex;
   flex-direction: column;
 }
 
-.case-card:hover {
+/* Hover */
+.case-card:hover,
+.case-featured:hover {
+  transform: translateY(-4px);
+  border-color: rgba(79, 209, 197, 0.3);
   box-shadow: var(--shadow-card-hover);
-border-color: hsl(182 60% 37% / 0.25);
-  transform: translateY(-2px);
+  cursor: pointer;
 }
 
-.case-card .arrow {
+/* Clickable overlay */
+.card-link {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  color: var(--teal);
-  opacity: 0.7;
+  inset: 0;
+  z-index: 5;
 }
 
+/* Allow buttons */
+.case-card a:not(.card-link),
+.case-featured a:not(.card-link) {
+  position: relative;
+  z-index: 10;
+}
+
+/* Arrow */
+.case-card::after,
+.case-featured::after {
+  content: "→";
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  opacity: 0;
+  transition: 0.3s;
+  color: var(--teal);
+}
+
+.case-card:hover::after,
+.case-featured:hover::after {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+/* Text */
+.summary {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
 .case-card h3 {
   font-size: 1.1rem;
   margin: 0 0 0.5rem;
@@ -2515,4 +2563,6 @@ textarea:focus-visible {
   .hero-typing {
     font-size: clamp(1.2rem, 5vw, 1.5rem);
   }
+
+  
 }

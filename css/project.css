@@ -1,0 +1,260 @@
+/* ================= PROJECT PAGE ================= */
+
+/* ================= HERO ================= */
+
+.case-hero {
+  padding: 100px 0;
+}
+
+.case-hero-grid {
+  display: grid;
+  gap: 50px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .case-hero-grid {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+/* TEXT */
+
+.case-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 15px;
+}
+
+.case-tagline {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+  max-width: 500px;
+}
+
+/* TECH STACK */
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-stack span {
+  padding: 6px 14px;
+  background: var(--surface);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+}
+
+
+/* ================= PHONE MOCKUP PRO ================= */
+
+.phone-mockup {
+  position: relative;
+  width: 270px;
+  margin: auto;
+  perspective: 1400px;
+}
+
+/* FRAME */
+.phone-frame {
+  width: 100%;
+  aspect-ratio: 9/19;
+  border-radius: 36px;
+  padding: 10px;
+  background: linear-gradient(145deg, #0f172a, #1e293b);
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  transform: rotateY(-12deg) rotateX(6deg);
+  transition: transform 0.6s ease;
+}
+
+/* SCREEN */
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+
+/* SLIDER */
+.phone-slider {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  cursor: grab;
+}
+
+.phone-slider:active {
+  cursor: grabbing;
+}
+
+.phone-slider img {
+  flex: 0 0 100%;
+  width: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+}
+/* DOTS */
+.phone-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.phone-dots span {
+  width: 6px;
+  height: 6px;
+  background: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.phone-dots span.active {
+  background: var(--teal);
+  transform: scale(1.3);
+}
+
+/* HOVER */
+.phone-mockup:hover .phone-frame {
+  transform: rotateY(0) rotateX(0) scale(1.05);
+}
+
+/* GLOW */
+.phone-glow {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(circle, rgba(79,209,197,0.25), transparent 70%);
+  z-index: -1;
+  filter: blur(45px);
+}
+
+/* ENTRY */
+.phone-mockup {
+  animation: floatIn 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes floatIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.phone-slider {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.phone-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 0 0 100%;
+}
+
+.case-tagline {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 10px 0 20px;
+}
+
+/* Tech stack */
+.tech-stack {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tech-stack span {
+  padding: 6px 12px;
+  background: var(--surface);
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* Sections */
+.case-section {
+  padding: 60px 0;
+}
+
+.case-section h2 {
+  margin-bottom: 20px;
+}
+
+/* Features */
+.feature-grid {
+  display: grid;
+  gap: 15px;
+}
+
+@media (min-width: 700px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.feature-card {
+  padding: 15px;
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+/* Impact */
+.impact-grid {
+  display: flex;
+  gap: 30px;
+}
+
+.impact-grid div {
+  text-align: center;
+}
+
+.impact-grid strong {
+  font-size: 1.8rem;
+  color: var(--teal);
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 700px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* CTA */
+.case-cta {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Case Study — E-Commerce App</title>
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/project.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">
+      <img src="../assets/logo.png">
+      <span class="logo-text">Rasha Omran</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="case-hero">
+  <div class="container case-hero-grid">
+
+    <!-- LEFT -->
+    <div class="case-hero-content">
+      <h1 class="case-title">E-Commerce Mobile App</h1>
+
+      <p class="case-tagline">
+        A high-performance shopping experience engineered for speed, scalability, and conversion.
+      </p>
+
+      <div class="tech-stack">
+        <span>Flutter</span>
+        <span>Firebase</span>
+        <span>REST API</span>
+        <span>Cubit</span>
+      </div>
+    </div>
+
+    <!-- RIGHT (INTERACTIVE PHONE) -->
+    <div class="case-visual">
+      <div class="phone-mockup">
+
+      
+         
+
+            <!-- SLIDER -->
+           <div class="phone-frame">
+  <div class="phone-screen">
+    <div class="phone-slider" id="phoneSlider">
+      <img src="../assets/app1.png">
+      <img src="../assets/app2.png">
+      <img src="../assets/app3.png">
+    </div>
+  </div>
+</div>
+
+<div class="phone-dots" id="phoneDots"></div>
+          </div>
+        </div>
+
+        <!-- DOTS -->
+        <div class="phone-dots" id="phoneDots"></div>
+
+        <!-- GLOW -->
+        <div class="phone-glow"></div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ================= OVERVIEW ================= -->
+<section class="case-section">
+  <div class="container">
+    <h2>Overview</h2>
+
+    <p>
+      This project is a scalable e-commerce application designed for businesses needing fast,
+      reliable mobile shopping experiences.
+    </p>
+
+    <p><strong>Target Users:</strong> Online retailers & startups</p>
+    <p><strong>Problem Solved:</strong> Poor performance and low conversion rates</p>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section class="case-section section-alt">
+  <div class="container">
+    <h2>The Problem</h2>
+
+    <p>
+      Existing apps suffered from slow loading, complex UX, and poor scalability,
+      leading to user drop-off and low engagement.
+    </p>
+  </div>
+</section>
+
+<!-- ================= SOLUTION ================= -->
+<section class="case-section">
+  <div class="container">
+    <h2>The Solution</h2>
+
+    <p>
+      I rebuilt the application using Flutter with clean architecture, optimized API handling,
+      and modular components to ensure scalability and performance.
+    </p>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="case-section section-alt">
+  <div class="container">
+    <h2>Key Features</h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">Fast product loading</div>
+      <div class="feature-card">Secure authentication</div>
+      <div class="feature-card">Real-time updates</div>
+      <div class="feature-card">Responsive UI</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TECH ================= -->
+<section class="case-section">
+  <div class="container">
+    <h2>Technical Implementation</h2>
+
+    <ul class="tech-list">
+      <li>Flutter for cross-platform UI</li>
+      <li>Cubit for state management</li>
+      <li>REST APIs with Dio</li>
+      <li>Firebase Authentication</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= RESULTS ================= -->
+<section class="case-section section-alt">
+  <div class="container">
+    <h2>Results & Impact</h2>
+
+    <div class="impact-grid">
+      <div><strong>+60%</strong><span>Performance</span></div>
+      <div><strong>-40%</strong><span>Load Time</span></div>
+      <div><strong>↑ UX</strong><span>Engagement</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="case-section">
+  <div class="container">
+    <h2>Visual Gallery</h2>
+
+    <div class="gallery-grid">
+      <img src="../assets/screen1.png">
+      <img src="../assets/screen2.png">
+      <img src="../assets/screen3.png">
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="case-cta">
+  <div class="container">
+    <h2>Have a similar project in mind?</h2>
+
+    <div class="cta-buttons">
+      <a href="../index.html#contact" class="btn btn-primary">Start Your Project</a>
+      <a href="../index.html#contact" class="btn btn-ghost">Request Consultation</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const slider = document.getElementById("phoneSlider");
+  const dotsContainer = document.getElementById("phoneDots");
+
+  let index = 0;
+  const slides = slider.children.length;
+
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+  let velocity = 0;
+  let lastX = 0;
+  let lastTime = 0;
+
+  const slideWidth = slider.parentElement.offsetWidth;
+
+  /* CREATE DOTS */
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = dotsContainer.children;
+
+  function setPosition(x, smooth = true) {
+    slider.style.transition = smooth ? "transform 0.5s cubic-bezier(0.22,1,0.36,1)" : "none";
+    slider.style.transform = `translateX(${x}px)`;
+  }
+
+  function snapToSlide() {
+    index = Math.max(0, Math.min(index, slides - 1));
+
+    setPosition(-index * slideWidth, true);
+
+    for (let d of dots) d.classList.remove("active");
+    dots[index].classList.add("active");
+  }
+
+  function onStart(clientX) {
+    isDragging = true;
+    startX = clientX;
+    lastX = clientX;
+    lastTime = Date.now();
+    slider.style.transition = "none";
+  }
+
+  function onMove(clientX) {
+    if (!isDragging) return;
+
+    const dx = clientX - startX;
+    currentX = -index * slideWidth + dx;
+
+    /* EDGE RESISTANCE */
+    if (currentX > 0) currentX *= 0.3;
+    if (currentX < -(slides - 1) * slideWidth)
+      currentX = -(slides - 1) * slideWidth + (currentX + (slides - 1) * slideWidth) * 0.3;
+
+    setPosition(currentX, false);
+
+    /* VELOCITY */
+    const now = Date.now();
+    velocity = (clientX - lastX) / (now - lastTime);
+    lastX = clientX;
+    lastTime = now;
+  }
+
+  function onEnd(clientX) {
+    if (!isDragging) return;
+    isDragging = false;
+
+    const dx = clientX - startX;
+
+    /* DECIDE BASED ON DISTANCE + VELOCITY */
+    if (dx < -50 || velocity < -0.3) {
+      index++;
+    } else if (dx > 50 || velocity > 0.3) {
+      index--;
+    }
+
+    snapToSlide();
+  }
+
+  /* TOUCH */
+  slider.addEventListener("touchstart", e => onStart(e.touches[0].clientX));
+  slider.addEventListener("touchmove", e => onMove(e.touches[0].clientX));
+  slider.addEventListener("touchend", e => onEnd(e.changedTouches[0].clientX));
+
+  /* MOUSE */
+  slider.addEventListener("mousedown", e => onStart(e.clientX));
+  window.addEventListener("mousemove", e => onMove(e.clientX));
+  window.addEventListener("mouseup", e => onEnd(e.clientX));
+
+  /* AUTO PLAY (optional premium feel) */
+  setInterval(() => {
+    if (isDragging) return;
+    index = (index + 1) % slides;
+    snapToSlide();
+  }, 4000);
+
+});
+</script>
+
+</body>
+</html>
