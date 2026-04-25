@@ -1641,6 +1641,26 @@ border-color: hsl(182 60% 37% / 0.25);
   line-height: 1.45;
 }
 
+/* Ensure the spacer takes up the full row width */
+.grid-spacer {
+  grid-column: 1 / -1; 
+  height: 0.05rem; /* This creates the space you requested */
+}
+
+/* Ensure hidden projects container handles the transition correctly */
+.hidden-projects {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add space between the projects grid and the button */
+.case-toggle {
+  margin-top: 3rem; /* You can adjust '3rem' to whatever height you prefer */
+}
+
 /* Training block */
 .split-section {
   display: grid;
@@ -2563,6 +2583,14 @@ textarea:focus-visible {
   .hero-typing {
     font-size: clamp(1.2rem, 5vw, 1.5rem);
   }
+/* =========================
+   CASE WRAPPER
+========================= */
+.case-wrapper {
+  margin-top: 2rem;
+}
 
-  
+
+
+
 }
